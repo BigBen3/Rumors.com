@@ -1,0 +1,21 @@
+{% extends 'rumors/base.html' %} 
+{% block content %}
+{% for community in communities %}
+<article class="media content-section">
+  <img class="rounded-circle article-img" src="{{ community.image.url }}" />
+  <div class="media-body">
+    <div class="article-metadata">
+      <small class="text-muted"
+        >{{ community.date_posted|date:"F d, Y" }}</small
+      >
+      <h2>
+        <a class="article-title" href="{% url 'rumors-detail' community.pk %}"
+          >{{ community.title }}</a
+        >
+      </h2>
+    </div>
+  </div>
+</article>
+
+{% endfor %} 
+{% endblock content %}
