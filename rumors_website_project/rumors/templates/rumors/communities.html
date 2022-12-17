@@ -1,9 +1,23 @@
 {% extends 'rumors/base.html' %} {% block content%}
 
-{% for com in community %} 
+<h1>Posts</h1>
+<div>
+    {% for post in community.post_set.all %} 
 
-<h2>com.post.title</h2>
+
+    <h2>{{post.title}}</h2>
+
 
 {% endfor %}
+
+</div>
+
+<div align="right">
+    <form method="POST">
+        {% csrf_token %} 
+            <button type="submit"> Join Community </button>
+            
+    </form>
+</div> 
 
 {% endblock content %}
