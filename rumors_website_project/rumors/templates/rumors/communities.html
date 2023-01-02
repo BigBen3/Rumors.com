@@ -13,9 +13,10 @@
 </div>
 
 <div align="right">
-    <form method="POST">
+    <form action="{% url 'rumors-button' %}" method="POST">
         {% csrf_token %} 
             <button type="submit"> Join Community </button>
+                    
             
     </form>
 </div> 

@@ -11,6 +11,7 @@ urlpatterns = [
          name='rumors-available-communites'),
     path('communites/<int:pk>/', CommunitiesDetailView.as_view(),
          name='rumors-detail'),
+    path('button/', views.JoinButton,name="rumors-button")
 
 
 
