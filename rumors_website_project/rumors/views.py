@@ -6,7 +6,7 @@ from .forms import CommunityForm, PostForm
 from django.contrib.auth.models import Permission
 
 
-#hello test 
+
 
 def home(request):
     return render(request, 'rumors/home.html')
