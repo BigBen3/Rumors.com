@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, DetailView
 from .models import Community, Post
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .forms import CommunityForm, PostForm
 from django.contrib.auth.models import Permission
 
+
+#hello test 
 
 def home(request):
     return render(request, 'rumors/home.html')
@@ -13,6 +15,21 @@ def home(request):
 def about(request):
     return render(request, 'rumors/about.html')
 
+
+def JoinButton(request):
+      if request.method == "POST":
+        user = request.user
+        model_id = request.POST['id']
+        all_permissions = Permission.objects.filter(content_type__app_label='blog', content_type__model='post')
+        if not user.has_perm('rumors.add_post') or not user.has_perm('rumors.delete_post'):
+          permission_add = Permission.objects.get(codename="rumors.add_post")
+          permission_remove = Permission.object.get(codename='rumors.delete_post')
+          user.user_permissions.add(permission_add, permission_remove)
+          return redirect(reverse('rumors-detail', args=model_id))
+        else:
+             return redirect(reverse('rumors-detail', args=model_id))
+   
+      
 
 class AvailableCommunitesListView(ListView):
     model = Community
@@ -28,11 +45,7 @@ class CommunitiesDetailView(DetailView):
     template_name = 'rumors/communities.html'
     context_object_name = 'community'
 
-    def join_button(self, request):
-        if request.method == "POST":
-            user = request.user
-            Permission.grant_permission(user , object, 'rumors.post.can_add_post', 'rumors.post.can_remove_post')
-            
+
   
 
 class CreateCommunityView(CreateView):
