@@ -16,18 +16,18 @@ def about(request):
     return render(request, 'rumors/about.html')
 
 
+
 def JoinButton(request):
-      if request.method == "POST":
+      if request.is_ajax and request.method == "POST":
         user = request.user
-        model_id = request.POST['id']
-        all_permissions = Permission.objects.filter(content_type__app_label='blog', content_type__model='post')
+        modelId = request.post
         if not user.has_perm('rumors.add_post') or not user.has_perm('rumors.delete_post'):
           permission_add = Permission.objects.get(codename="rumors.add_post")
           permission_remove = Permission.object.get(codename='rumors.delete_post')
           user.user_permissions.add(permission_add, permission_remove)
-          return redirect(reverse('rumors-detail', args=model_id))
+          return redirect(reverse('rumors-detail' , args = modelId))
         else:
-             return redirect(reverse('rumors-detail', args=model_id))
+             return redirect(reverse('rumors-detail', args = modelId ))
    
       
 

@@ -12,13 +12,35 @@
 
 </div>
 
+
+
+{% if perms.rumors.add_post %}
+
+
+
+{% else $}
 <div align="right">
-    <form action="{% url 'rumors-button' %}" method="POST">
-        {% csrf_token %} 
-            <button type="submit"> Join Community </button>
-                    
-            
+    
+    <form id="button-form">
+        {% csrf_token %}
+        <button type="submit"> Join Community </button>
     </form>
+   
+     
+            <script>
+                $("#button-form").submit(function(){
+                    var modelId = "{{community.pk}}";
+                    $.ajax({
+                        type: 'POST',
+                        url: "{% url 'rumors-button' %}",
+                        data:  modelId
+                    })
+                })
+            </script>
+   
+
+    
 </div> 
+{% endif %}
 
 {% endblock content %}

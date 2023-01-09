@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rumors.apps.RumorsConfig',
+    "users.apps.UserConfig",
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,6 +125,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_ROOT = BASE_DIR.joinpath('media')
 # the public url for the images and is how you access the images in the media directoy in the browser
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'rumors-home'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
