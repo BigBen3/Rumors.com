@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rumors.apps.RumorsConfig',
-    "users.apps.UserConfig",
+    "users.apps.UsersConfig",
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
